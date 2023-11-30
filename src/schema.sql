@@ -1,4 +1,4 @@
-create table Players
+CREATE TABLE Players
 (
     Id        int identity
         constraint Players_pk
@@ -9,9 +9,9 @@ create table Players
     FirstName nvarchar(60) not null,
     LastName  nvarchar(60) not null
 )
-go
+GO
 
-create table Roles
+CREATE TABLE Roles
 (
     Id   int identity
         constraint Roles_pk
@@ -20,9 +20,9 @@ create table Roles
         constraint Roles_pk2
             unique
 )
-go
+GO
 
-create table Teams
+CREATE TABLE Teams
 (
     Id           int identity
         constraint Teams_pk
@@ -32,9 +32,9 @@ create table Teams
         constraint Teams_pk2
             unique
 )
-go
+GO
 
-create table PlayerContracts
+CREATE TABLE PlayerContracts
 (
     Id       int identity
         constraint PlayerContracts_pk
@@ -51,15 +51,12 @@ create table PlayerContracts
         constraint PlayerContracts_Teams_Id_fk
             references Teams
 )
-go
+GO
 
 CREATE VIEW PlayerInfo AS
-
 SELECT Players.Alias AS 'Alias', Roles.Name AS 'Role Name', Teams.Name AS 'Team Name'
 FROM PlayerContracts
 JOIN Players ON PlayerContracts.PlayerId = Players.Id
 JOIN Roles ON PlayerContracts.RoleId = Roles.Id
 JOIN Teams ON PlayerContracts.TeamId = Teams.Id
-go
-
-
+GO
